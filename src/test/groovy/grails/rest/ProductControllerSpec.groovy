@@ -1,5 +1,6 @@
 package grails.rest
 
+import grails.plugin.json.view.mvc.JsonViewResolver
 import grails.test.hibernate.HibernateSpec
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
@@ -17,6 +18,10 @@ class ProductControllerSpec extends HibernateSpec {
     }
 
     def cleanup() {
+    }
+
+    static doWithSpring = {
+        jsonSmartViewResolver(JsonViewResolver)
     }
 
     void "test something"() {

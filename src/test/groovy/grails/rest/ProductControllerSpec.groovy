@@ -15,6 +15,12 @@ import spock.lang.*
 class ProductControllerSpec extends HibernateSpec {
 
     def setup() {
+        Product.saveAll(
+                new Product(name: 'Maça', price: 3.8),
+                new Product(name: 'Laranja', price: 4.2),
+                new Product(name: 'Banana', price: 2.65),
+                new Product(name: 'Caki', price: 7.0)
+        )
     }
 
     def cleanup() {
@@ -24,8 +30,12 @@ class ProductControllerSpec extends HibernateSpec {
         jsonSmartViewResolver(JsonViewResolver)
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "teste se a acao search localiza resultados"() {
+        when: "eh executada uma consulta que localiza resultados"
+        controller.search('ran', 10)
+
+        then: "a resposta estah correta"
+        response.json.size() == 1
+        response.json[0].name == 'Laranja'
     }
 }

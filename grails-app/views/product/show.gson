@@ -1,0 +1,7 @@
+import grails.rest.Product
+
+model {
+	Product product
+}
+
+json tmpl.product(product)

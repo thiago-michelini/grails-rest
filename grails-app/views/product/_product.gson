@@ -1,0 +1,13 @@
+import grails.rest.Product
+
+model {
+	Product product
+}
+
+//json g.render(product)
+Currency currency = locale?.country ? Currency.getInstance(locale) : Currency.getInstance('USD')
+json {
+	id product.id
+	name product.name
+	price "${currency.symbol}${product.price}"
+}
